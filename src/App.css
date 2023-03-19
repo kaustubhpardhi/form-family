@@ -1,0 +1,62 @@
+.logo {
+  height: 40px;
+  margin-top: -7px;
+  margin-left: 40px;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo-title {
+  margin-left: -20px;
+}
+.upload {
+  display: flex;
+  flex-direction: column;
+}
+.imageinput {
+  border: 1px solid lightgray;
+  width: 75%;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+.bob {
+  height: 50px;
+  margin-right: 20px;
+}
+.sub {
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .logo {
+    height: 50px;
+    margin-top: -60px;
+    margin-right: 50px;
+  }
+  .bob {
+    height: 50px;
+    width: 100px;
+    margin-top: 30px;
+    margin-right: 10px;
+  }
+
+  .header {
+    flex-direction: row;
+    gap: 0;
+    align-items: flex-start;
+  }
+  .logo-title {
+    margin-left: -40px;
+  }
+}
