@@ -21,7 +21,6 @@ import Footer from "./components/footer";
 import bob from "./bob.webp";
 import "./form.css";
 import { Routes, Route } from "react-router-dom";
-import Success from "./components/success";
 import { useNavigate } from "react-router-dom";
 
 function Form() {
@@ -38,7 +37,6 @@ function Form() {
   const [brother, setBrother] = useState([]);
   const [sister, setSister] = useState([]);
   const [children, setChildren] = useState([]);
-  const [info, setInfo] = useState([]);
   const [name, setName] = useState("");
   const [spouseName, setSpouseName] = useState("");
   const options = ["Brother", "Sister", "Children"];
@@ -55,20 +53,11 @@ function Form() {
     setName("");
     setSpouseName("");
   };
-  console.log(brother);
-  console.log(sister);
+
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
   console.log(selectedOption);
-
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
-
-  const handleSpouseNameChange = (event) => {
-    setSpouseName(event.target.value);
-  };
 
   const renderAdditionalFields = () => {
     switch (selectedOption) {
@@ -142,9 +131,9 @@ function Form() {
             </Button>
 
             <Typography sx={{ fontStyle: "italic" }}>
-              {info.length === 0
+              {children.length === 0
                 ? "No information added yet."
-                : `Added ${info.length} ${selectedOption}(s).`}
+                : `Added ${children.length} ${selectedOption}(s).`}
             </Typography>
           </>
         );
@@ -155,37 +144,36 @@ function Form() {
 
   const handleForm = async (event) => {
     event.preventDefault();
-    // if (!ownerName) {
-    //   return alert("Owner Name Not Found");
-    // }
-    // if (!shopOwnerName) {
-    //   return alert("Shop Owner Not Found");
-    // }
-    // if (!qualification) {
-    //   return alert("Qualification Not Found");
-    // }
-    // if (!fhName) {
-    //   return alert("Father/Husband Name Not Found");
-    // }
-    // if (!email) {
-    //   return alert("Email Not Found");
-    // }
-    // if (!/^(\+\d{1,3}[- ]?)?\d{10}$/i.test(number)) {
-    //   return alert("Please Provide a valid mobile number");
-    // }
-    // const user = localStorage.getItem("user");
-    // const ok = JSON.parse(user);
-    // const surveyor = ok.surveyorId;
+    if (!username) {
+      return alert("Owner Name Not Found");
+    }
+    if (!fatherName) {
+      return alert("Shop Owner Not Found");
+    }
+    if (!business) {
+      return alert("Qualification Not Found");
+    }
+    if (!businessAddress) {
+      return alert("Father/Husband Name Not Found");
+    }
+    if (!email) {
+      return alert("Email Not Found");
+    }
 
-    const postdata = {};
-
+    const postdata = {
+      username,
+      fatherName,
+      business,
+      businessAddress,
+      email,
+      brother,
+      sister,
+      children,
+      mother,
+    };
+    console.log(postdata);
     try {
-      // Set loading to true
-
-      // Make the post request and wait for the response
       const response = await axios.post("/form/saveform", postdata);
-
-      // Reset the form and navigate to the success page
       resetForm();
       navigate("/success");
     } catch (error) {
@@ -262,8 +250,8 @@ function Form() {
           }}
         >
           <FormInput
-            value={name}
-            onChange={setName}
+            value={username}
+            onChange={setUsername}
             label="Name"
             id="name"
             placeholder=""
